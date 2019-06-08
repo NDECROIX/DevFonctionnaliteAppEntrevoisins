@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Entrevoisins</string>
+    <string name="tab_neighbour_title">My neighbours</string>
+    <string name="tab_favorites_title">Favorites</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- DetailNeighbourActivity -->
+    <string name="white">White</string>
+    <string name="yellow">Yellow</string>
+    <string name="detail_about_me">A propos de moi</string>
+    <string name="back_button">Back button</string>
+    <string name="avatar_picture">Avatar picture</string>
+
+</resources>
