@@ -5,7 +5,7 @@
 ```
 Télécharger L'application
 ```
-[![DownloadZIP](./ImageReadme/DownloadZIP.png)]()
+[![DownloadZIP](./ImageReadme/DownloadZIP.PNG)]()
 
 ```
 Ouvrir le fichier avec AndroidStudio
@@ -13,7 +13,7 @@ Ouvrir le fichier avec AndroidStudio
 ```
 Lancer l'application sur l'émulateur
 ```
-[![Play](./ImageReadme/Play.png)]()
+[![Play](./ImageReadme/Play.PNG)]()
 
 ```
 Créer un appareil virtuel
@@ -23,17 +23,17 @@ Créer un appareil virtuel
 ```
 Choisir un appareil
 ```
-[![ChoiceDevice](./ImageReadme/ChoiceDevice.png)]()
+[![ChoiceDevice](./ImageReadme/ChoiceDevice.PNG)]()
 
 ```
 Choisir une image
 ```
-[![ImagePie](./ImageReadme/ImagePie.png)]()
+[![ImagePie](./ImageReadme/ImagePie.PNG)]()
 
 ```
 Changez le nom si besoin et cliquez sur finish
 ```
-[![Finish](./ImageReadme/Finish.png)]()
+[![Finish](./ImageReadme/Finish.PNG)]()
 
 ```
 Vous pouvez maintenant lancer l'appareil virtuel
