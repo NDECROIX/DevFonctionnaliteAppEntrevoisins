@@ -1,6 +1,7 @@
 
 package com.openclassrooms.entrevoisins.neighbour_list;
 
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -8,8 +9,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailNeighbourActivity;
-import com.openclassrooms.entrevoisins.ui.neighbour_list.FavouriteFragment;
+import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 import com.openclassrooms.entrevoisins.utils.ShowDetailNeighbourActivity;
@@ -20,13 +20,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -94,9 +92,9 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, sDNA));
         // Check if DetailNeighbourActivity running
-        intended(hasComponent(DetailNeighbourActivity.class.getName()));
+        intended(hasComponent(DetailsNeighbourActivity.class.getName()));
         // Check the TextView value is correct
-        onView(ViewMatchers.withId(R.id.detail_name)).check(matches(withText(sDNA.getName())));
+        onView(ViewMatchers.withId(R.id.details_name)).check(matches(withText(sDNA.getName())));
 
     }
 
@@ -107,14 +105,10 @@ public class NeighboursListTest {
     @Test
     public void myFavouriteList_checkNeighbours_shouldBeFavourite(){
 
-        Intents.init();
         // Perform a click on Favourite
-        onView(ViewMatchers.withId(R.id.tabItem2))
-                .perform(click());
-        // Check if FavouriteFragment is running
-        intended(hasComponent(FavouriteFragment.class.getName()));
+        onView(ViewMatchers.withContentDescription(R.string.tab_favorites_title))
+                .perform(ViewActions.click());
         // Make sure there are the right number of favourite neighbours
         onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT));
     }
-
 }

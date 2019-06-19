@@ -13,8 +13,12 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteFavouriteEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -66,6 +70,23 @@ public class FavouriteFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        initList();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * Fired if the user clicks on a delete button
+     * @param event
+     */
+    @Subscribe
+    public void onDeleteNeighbour(DeleteFavouriteEvent event) {
+        mApiService.deleteFavourite(event.favourite);
         initList();
     }
 }

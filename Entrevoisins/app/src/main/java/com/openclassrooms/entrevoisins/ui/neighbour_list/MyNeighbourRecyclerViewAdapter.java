@@ -2,6 +2,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailNeighbourActivity;
+import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailNeighbourActivity.NEIGHBOUR;
+import static com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity.NEIGHBOUR;
 
 public class MyNeighbourRecyclerViewAdapter
         extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
@@ -45,8 +45,11 @@ public class MyNeighbourRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
         Neighbour neighbour = mNeighbours.get(position);
+
         holder.mNeighbourName.setText(neighbour.getName());
+
         Glide.with(holder.mNeighbourAvatar.getContext())
                 .load(neighbour.getAvatarUrl())
                 .apply(RequestOptions.circleCropTransform())
@@ -56,15 +59,19 @@ public class MyNeighbourRecyclerViewAdapter
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour)));
 
         holder.itemView.setOnClickListener(l -> {
-
-            Gson gson = new Gson();
-            String json = gson.toJson(neighbour);
-
-            Context c =  holder.itemView.getContext();
-            Intent intent = new Intent(c, DetailNeighbourActivity.class);
-            intent.putExtra(NEIGHBOUR, json);
-            c.startActivity(intent);
+            Context context =  holder.itemView.getContext();
+            startDetailActivity(context, neighbour);
         });
+    }
+
+    private static void startDetailActivity(Context context, Neighbour neighbour){
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(NEIGHBOUR, neighbour);
+
+        Intent intent = new Intent(context, DetailsNeighbourActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override
