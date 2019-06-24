@@ -12,6 +12,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
+import com.openclassrooms.entrevoisins.utils.DeleteViewActionFavourite;
 import com.openclassrooms.entrevoisins.utils.ShowDetailNeighbourActivity;
 
 import org.junit.Before;
@@ -25,7 +26,7 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -80,22 +81,53 @@ public class NeighboursListTest {
 
     /**
      * When we click on an item, DetailNeighbourActivity is launched
-     * and the TextView name is correct
      */
     @Test
     public void myNeighbourList_clickAction_shouldShowDetailNeighbourActivity(){
 
         Intents.init();
-        ShowDetailNeighbourActivity sDNA = new ShowDetailNeighbourActivity();
+        ShowDetailNeighbourActivity showDetailNeighbourActivity = new ShowDetailNeighbourActivity();
 
         // Perform a click on an item
         onView(ViewMatchers.withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, sDNA));
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, showDetailNeighbourActivity));
+
         // Check if DetailNeighbourActivity running
         intended(hasComponent(DetailsNeighbourActivity.class.getName()));
-        // Check the TextView value is correct
-        onView(ViewMatchers.withId(R.id.details_name)).check(matches(withText(sDNA.getName())));
+    }
 
+    /**
+     * When DetailNeighbourActivity is launched
+     * the TextView name is completed
+     */
+    @Test
+    public void myDetailsNeighbourActivity_start_shouldShowNameUser(){
+
+        ShowDetailNeighbourActivity showDetailNeighbourActivity = new ShowDetailNeighbourActivity();
+
+        // Perform a click on an item
+        onView(ViewMatchers.withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, showDetailNeighbourActivity));
+
+        // Check the Title value is correct
+        onView(ViewMatchers.withId(R.id.activity_details_collapsing_toolbar)).check(matches(withContentDescription(showDetailNeighbourActivity.getName())));
+    }
+
+    /**
+     * When we delete an item in favourite, the item is no more shown
+     */
+    @Test
+    public void myFavouritesList_deleteAction_shouldRemoveItem() {
+
+        // Perform a click on Favourite
+        onView(ViewMatchers.withContentDescription(R.string.tab_favorites_title))
+                .perform(ViewActions.click());
+        onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT));
+        // When perform a click on a delete icon
+        onView(ViewMatchers.withId(R.id.list_favourites))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewActionFavourite()));
+        // Then : the number of element is 4
+        onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT -1));
     }
 
     /**
