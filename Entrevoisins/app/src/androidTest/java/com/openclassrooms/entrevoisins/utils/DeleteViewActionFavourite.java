@@ -22,7 +22,6 @@ public class DeleteViewActionFavourite implements ViewAction {
     @Override
     public void perform(UiController uiController, View view) {
         View button = view.findViewById(R.id.favourite_item_list_delete_button);
-        // Maybe check for null
-        button.performClick();
+        if  (button != null) button.performClick();
     }
 }
