@@ -24,22 +24,22 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 
     public static final String NEIGHBOUR = "Neighbour";
 
-    @BindView(R.id.header)
+    @BindView(R.id.activity_details_iv_avatar)
     ImageView mAvatar;
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.activity_details_toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.fab)
+    @BindView(R.id.activity_details_fab)
     FloatingActionButton fab;
 
-    @BindView(R.id.details_name)
+    @BindView(R.id.activity_details_content_tv_name)
     TextView mName;
 
-    @BindView(R.id.details_facebook)
+    @BindView(R.id.activity_details_content_tv_facebook)
     TextView mFacebook;
 
-    @BindView(R.id.collapsing_toolbar)
+    @BindView(R.id.activity_details_collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     private Neighbour mNeighbour;
@@ -58,10 +58,9 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
     /**
      * configure the toolbar with the neighbor's name
      */
-    private void configToolbar(){
-
+    private void configToolbar() {
         setSupportActionBar(toolbar);
-        if ( getSupportActionBar() != null ){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -70,42 +69,33 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
      * displays the neighbor's data on the view
      */
     private void configView() {
-
         Bundle bundle = getIntent().getExtras();
-
         mNeighbour = (Neighbour) bundle.getSerializable(NEIGHBOUR);
 
         collapsingToolbarLayout.setTitle(this.mNeighbour.getName());
-
         mName.setText(mNeighbour.getName());
         mFacebook.append(mNeighbour.getName().toLowerCase());
-
-        if (mApiService.getFavourites().contains(mNeighbour))
+        if (mApiService.isFavourite(mNeighbour))
             fab.setImageResource(R.drawable.ic_star_yellow_24);
 
-        if (mNeighbour.getAvatarUrl() != null) {
-            String picture = mNeighbour.getAvatarUrl().replace(
-                    getString(R.string.target_to_be_replaced), getString(R.string.target_replacement));
-
-            Glide.with(this)
-                    .load(picture)
-                    .centerCrop()
-                    .into(mAvatar);
-        }
+        Glide.with(this)
+                .load(mNeighbour.getAvatarUrl())
+                .centerCrop()
+                .into(mAvatar);
     }
 
-    @OnClick(R.id.fab)
-    public void favourite(View view){
-
-        if (!mApiService.getFavourites().contains(mNeighbour)){
+    @OnClick(R.id.activity_details_fab)
+    public void favourite(View view) {
+        if (!mApiService.isFavourite(mNeighbour)) {
             mApiService.addFavourite(mNeighbour);
             fab.setImageResource(R.drawable.ic_star_yellow_24);
             showSnackBar(view, getString(R.string.add_favourite));
-
-        } else showSnackBar(view, getString(R.string.already_favourite));
+        } else {
+            showSnackBar(view, getString(R.string.already_favourite));
+        }
     }
 
-    private void showSnackBar(View view, String message){
+    private void showSnackBar(View view, String message) {
         Snackbar.make(view, mNeighbour.getName() + " " + message, Snackbar.LENGTH_LONG).show();
     }
 }
