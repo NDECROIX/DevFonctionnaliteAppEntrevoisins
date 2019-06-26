@@ -52,9 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="?android:colorBackground"
         app:layout_anchor="@id/activity_details_app_bar"
         app:layout_anchorGravity="bottom|end"
-        android:src="@drawable/ic_star_white_24dp"
-        android:backgroundTint="?android:colorBackground"/>
+        app:srcCompat="@drawable/ic_star_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

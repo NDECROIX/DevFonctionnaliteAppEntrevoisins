@@ -7,8 +7,8 @@
     android:name="com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="@dimen/margin"
+    android:layout_marginRight="@dimen/margin"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.neighbour_list.FavouriteFragment"
     tools:listitem="@layout/fragment_favourite" />
