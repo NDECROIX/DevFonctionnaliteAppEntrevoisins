@@ -20,7 +20,4 @@
     <string name="add_favourite">a été ajouté(e) aux favoris</string>
     <string name="already_favourite">fait déjà partie des favoris</string>
 
-    <string name="target_to_be_replaced">150?</string>
-    <string name="target_replacement">400?</string>
-
 </resources>

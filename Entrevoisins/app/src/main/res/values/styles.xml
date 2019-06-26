@@ -17,4 +17,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Title CardView -->
+    <style name="titleCardView" parent="TextAppearance.MaterialComponents.Headline6"/>
+
+
 </resources>
