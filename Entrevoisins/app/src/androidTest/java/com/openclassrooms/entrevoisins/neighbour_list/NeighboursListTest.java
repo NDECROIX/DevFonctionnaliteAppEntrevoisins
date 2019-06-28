@@ -12,7 +12,6 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
-import com.openclassrooms.entrevoisins.utils.DeleteViewActionFavourite;
 import com.openclassrooms.entrevoisins.utils.ShowDetailNeighbourActivity;
 
 import org.junit.Before;
@@ -26,7 +25,8 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -40,7 +40,6 @@ public class NeighboursListTest {
 
     // This is fixed
     private static int NEIGHBOURS_ITEMS_COUNT = 12;
-    private static int FAVOURITES_ITEMS_COUNT = 5;
 
     private ListNeighbourActivity mActivity;
 
@@ -60,7 +59,7 @@ public class NeighboursListTest {
     @Test
     public void myNeighboursList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
-        onView(ViewMatchers.withId(R.id.list_neighbours))
+        onView(withId(R.id.list_neighbours))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
@@ -71,12 +70,12 @@ public class NeighboursListTest {
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
 
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(NEIGHBOURS_ITEMS_COUNT));
+        onView(withId(R.id.list_neighbours)).check(withItemCount(NEIGHBOURS_ITEMS_COUNT));
         // When perform a click on a delete icon
-        onView(ViewMatchers.withId(R.id.list_neighbours))
+        onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(NEIGHBOURS_ITEMS_COUNT -1));
+        onView(withId(R.id.list_neighbours)).check(withItemCount(NEIGHBOURS_ITEMS_COUNT -1));
     }
 
     /**
@@ -86,12 +85,9 @@ public class NeighboursListTest {
     public void myNeighbourList_clickAction_shouldShowDetailNeighbourActivity(){
 
         Intents.init();
-        ShowDetailNeighbourActivity showDetailNeighbourActivity = new ShowDetailNeighbourActivity();
-
         // Perform a click on an item
-        onView(ViewMatchers.withId(R.id.list_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, showDetailNeighbourActivity));
-
+        onView(withId(R.id.list_neighbours))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
         // Check if DetailNeighbourActivity running
         intended(hasComponent(DetailsNeighbourActivity.class.getName()));
     }
@@ -104,43 +100,12 @@ public class NeighboursListTest {
     public void myDetailsNeighbourActivity_start_shouldShowNameUser(){
 
         ShowDetailNeighbourActivity showDetailNeighbourActivity = new ShowDetailNeighbourActivity();
-
         // Perform a click on an item
-        onView(ViewMatchers.withId(R.id.list_neighbours))
+        onView(withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, showDetailNeighbourActivity));
-
         // Check the Title value is correct
-        onView(ViewMatchers.withId(R.id.activity_details_collapsing_toolbar)).check(matches(withContentDescription(showDetailNeighbourActivity.getName())));
+        onView(withId(R.id.activity_details_tv_name))
+                .check(matches(withText(showDetailNeighbourActivity.getName())));
     }
 
-    /**
-     * When we delete an item in favourite, the item is no more shown
-     */
-    @Test
-    public void myFavouritesList_deleteAction_shouldRemoveItem() {
-
-        // Perform a click on Favourite
-        onView(ViewMatchers.withContentDescription(R.string.tab_favorites_title))
-                .perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT));
-        // When perform a click on a delete icon
-        onView(ViewMatchers.withId(R.id.list_favourites))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewActionFavourite()));
-        // Then : the number of element is 4
-        onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT -1));
-    }
-
-    /**
-     * When we click on favourite, make sur the number
-     * of favourite neighbours is right
-     */
-    @Test
-    public void myFavouriteList_checkNeighbours_shouldBeFavourite(){
-
-        // Perform a click on Favourite
-        onView(ViewMatchers.withContentDescription(R.string.tab_favorites_title))
-                .perform(ViewActions.click());
-        // Make sure there are the right number of favourite neighbours
-        onView(ViewMatchers.withId(R.id.list_favourites)).check(withItemCount(FAVOURITES_ITEMS_COUNT));
-    }
 }
