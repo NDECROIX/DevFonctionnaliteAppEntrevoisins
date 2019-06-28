@@ -25,7 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity.NEIGHBOUR;
 
 public class MyNeighbourRecyclerViewAdapter
         extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
@@ -60,18 +59,8 @@ public class MyNeighbourRecyclerViewAdapter
 
         holder.itemView.setOnClickListener(l -> {
             Context context =  holder.itemView.getContext();
-            startDetailActivity(context, neighbour);
+            context.startActivity(DetailsNeighbourActivity.newIntent(context, neighbour));
         });
-    }
-
-    private static void startDetailActivity(Context context, Neighbour neighbour){
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(NEIGHBOUR, neighbour);
-
-        Intent intent = new Intent(context, DetailsNeighbourActivity.class);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
     }
 
     @Override

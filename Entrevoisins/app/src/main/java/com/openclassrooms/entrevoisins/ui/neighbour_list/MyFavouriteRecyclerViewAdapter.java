@@ -45,9 +45,9 @@ public class MyFavouriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavou
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        Neighbour favourite = mFavourites.get(i);
+        Neighbour favourite = mFavourites.get(position);
 
         viewHolder.mFavouriteName.setText(favourite.getName());
 
@@ -61,19 +61,11 @@ public class MyFavouriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavou
 
         viewHolder.itemView.setOnClickListener(view -> {
             Context context =  viewHolder.itemView.getContext();
-            startDetailActivity(context, favourite);
+            context.startActivity(DetailsNeighbourActivity.newIntent(context, favourite));
         });
     }
 
-    private static void startDetailActivity(Context context, Neighbour favourite){
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(NEIGHBOUR, favourite);
-
-        Intent intent = new Intent(context, DetailsNeighbourActivity.class);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
 
     @Override
     public int getItemCount() {
