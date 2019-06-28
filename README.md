@@ -45,4 +45,4 @@ Changez le nom si besoin et cliquez sur finish
 ```
 Vous pouvez maintenant lancer l'application sur l'émulateur et voir l'écrant suivant apparaître
 ```
-[![AppLaunched](./ImageReadme/AppLaunched.PNG)]()
+[![AppLaunched](./ImageReadme/AppLaunched.png)]()
