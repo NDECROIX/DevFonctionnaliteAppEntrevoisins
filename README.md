@@ -1,4 +1,4 @@
-# Entrevoisins
+﻿# Entrevoisins
 
 ## Installation
 
@@ -43,6 +43,6 @@ Changez le nom si besoin et cliquez sur finish
 [![Finish](./ImageReadme/Finish.PNG)]()
 
 ```
-Vous pouvez maintenant lancer l'application sur l'appareil virtuel
+Vous pouvez maintenant lancer l'application sur l'émulateur et voir l'écrant suivant apparaître
 ```
-
+[![AppLaunched](./ImageReadme/AppLaunched.PNG)]()
