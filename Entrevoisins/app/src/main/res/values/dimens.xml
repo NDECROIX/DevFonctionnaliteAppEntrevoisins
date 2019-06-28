@@ -11,7 +11,6 @@
     <dimen name="gutter">16dp</dimen>
     
     <!-- activity_neighbour_detail -->
-    <dimen name="app_bar_height">280dp</dimen>
-    <dimen name="title_margin_start">16dp</dimen>
-    <dimen name="title_margin_end">72dp</dimen>
+    <dimen name="app_bar_height">300dp</dimen>
+    <dimen name="title_name_bottom">28dp</dimen>
 </resources>
