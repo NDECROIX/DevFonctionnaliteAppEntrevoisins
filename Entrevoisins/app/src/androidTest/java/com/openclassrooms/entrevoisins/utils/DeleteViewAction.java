@@ -14,7 +14,7 @@ public class DeleteViewAction implements ViewAction {
 
     @Override
     public String getDescription() {
-        return "Click on specific button";
+        return "Click on the delete button of a neighbour from the RecycleView";
     }
 
     @Override

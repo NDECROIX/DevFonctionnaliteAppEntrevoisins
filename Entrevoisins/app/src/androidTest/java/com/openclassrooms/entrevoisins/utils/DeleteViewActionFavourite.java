@@ -16,7 +16,7 @@ public class DeleteViewActionFavourite implements ViewAction {
 
     @Override
     public String getDescription() {
-        return "Click on specific button";
+        return "Click on the delete button of a favorite from the RecycleView";
     }
 
     @Override
