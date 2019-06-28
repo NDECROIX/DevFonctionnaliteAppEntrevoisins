@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/text_margin"
                     android:layout_marginStart="@dimen/text_margin"
-                    android:textAppearance="@style/titleCardView"
+                    android:textAppearance="@style/styleTitleCardView"
                     card_view:layout_constraintTop_toTopOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"/>
 
@@ -114,7 +114,7 @@
                     android:layout_marginStart="@dimen/text_margin"
                     android:layout_marginEnd="@dimen/text_margin"
                     android:text="@string/detail_about_me"
-                    android:textAppearance="@style/titleCardView"
+                    android:textAppearance="@style/styleTitleCardView"
                     card_view:layout_constraintTop_toTopOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"/>
 
