@@ -51,22 +51,22 @@ public class NeighbourServiceTest {
 
     @Test
     public void deleteFavouriteWithSuccess(){
-        Neighbour favouriteToDelete = service.getFavourites().get(0);
-        service.deleteFavourite(favouriteToDelete);
-        assertFalse(service.getFavourites().contains(favouriteToDelete));
+        Neighbour favourite = service.getFavourites().get(0);
+        service.deleteFavourite(favourite);
+        assertFalse(service.getFavourites().contains(favourite));
     }
 
     @Test
     public void isFavouriteWithSuccess(){
-        List<Neighbour> neighbours = service.getNeighbours();
-        assertTrue(service.isFavourite(neighbours.get(0)));
-        assertFalse(service.isFavourite(neighbours.get(5)));
+        Neighbour neighbour = service.getNeighbours().get(0);
+        service.addFavourite(neighbour);
+        assertTrue(service.isFavourite(neighbour));
     }
 
     @Test
     public void addFavouriteWithSuccess(){
-        Neighbour favouriteToAdd = service.getFavourites().get(0);
-        service.addFavourite(favouriteToAdd);
-        assertTrue(service.getFavourites().contains(favouriteToAdd));
+        Neighbour neighbour = service.getNeighbours().get(0);
+        service.addFavourite(neighbour);
+        assertTrue(service.getFavourites().contains(neighbour));
     }
 }
