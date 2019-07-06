@@ -82,7 +82,7 @@ public class FavouritesListTest {
         // When perform a click on a delete icon
         onView(withId(R.id.list_favourites))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewActionFavourite()));
-        // Then : the number of element is 4
+        // Then : the number of element is favouritesCount - 1
         onView(withId(R.id.list_favourites)).check(withItemCount(favouritesCount - 1));
     }
 }
