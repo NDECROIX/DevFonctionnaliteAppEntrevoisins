@@ -26,8 +26,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.openclassrooms.entrevoisins.ui.neighbour_detail.DetailsNeighbourActivity.NEIGHBOUR;
-
 public class MyFavouriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavouriteRecyclerViewAdapter.ViewHolder> {
 
     private List<Neighbour> mFavourites;
