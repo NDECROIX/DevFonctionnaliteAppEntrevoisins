@@ -55,16 +55,6 @@ public class FavouritesListTest {
     }
 
     /**
-     * We ensure that our recyclerview is displaying at least on item
-     */
-    @Test
-    public void myFavouritesList_shouldNotBeEmpty() {
-        // First scroll to the position that needs to be matched and click on it.
-        onView(withId(R.id.list_favourites))
-                .check(matches(hasMinimumChildCount(1)));
-    }
-
-    /**
      * Make sur the number of favourite neighbours is right
      */
     @Test
