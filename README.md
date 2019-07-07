@@ -10,7 +10,7 @@ Télécharger L'application
 [![DownloadZIP](./ImageReadme/DownloadZIP.PNG)]()
 
 ```
-Ouvrir le fichier avec AndroidStudio
+Ouvrir le projet avec Android Studio
 ```
 ```
 Lancer l'application sur l'émulateur
